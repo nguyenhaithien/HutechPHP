@@ -22172,7 +22172,6 @@ textarea {
  height:100%;
  box-shadow:0 5px 10px 0 rgba(0,0,0,.2);
  opacity:0;
- height: 150px;
  visibility:hidden
 }
 .main-menu .navbar .navbar-item.is-mega .mega-list-wrapper {
@@ -22186,7 +22185,6 @@ textarea {
  padding:0
 }
 .main-menu .navbar .navbar-item.is-mega .mega-list-wrapper .mega-list li a {
- margin-top: 15px;
  padding:7px 0;
  display:inline-block;
  font-weight:500;
@@ -22965,6 +22963,39 @@ textarea {
 .modal.login-modal .modal-content .tabs-contents>div .form-login {
  text-align:center
 }
+.modal.login-modal .modal-content .success-mail{
+ width:310px;
+ position:absolute;
+ top:120px;
+ left:305px;
+ text-align:center;
+ transition:all .3s
+}
+.modal.login-modal .modal-content .success-mail.hidden {
+ opacity:0;
+ visibility:hidden
+}
+.modal.login-modal .modal-content .success-mail .check-icon {
+ display:inline-block;
+ margin-bottom:20px;
+ margin-left: 30%;
+}
+.modal.login-modal .modal-content .success-mail .caption {
+ font-weight:500;
+ text-align:center;
+ color:#000;
+ display:block;
+ margin-left: 30%;
+}
+.modal.login-modal .modal-content .success-mail a#getbacktologin {
+ margin-top: 10px;
+ margin-left: 28%;
+ font-size:16px;
+ font-weight:700;
+ color:#56ccf2;
+ text-decoration:underline;
+
+}
 .modal.login-modal .modal-content .tabs-contents>div .form-login input[type=email],
 .modal.login-modal .modal-content .tabs-contents>div .form-login input[type=password],
 .modal.login-modal .modal-content .tabs-contents>div .form-login input[type=text] {
@@ -22991,7 +23022,7 @@ width:100%;
  margin-bottom:20px;
  cursor:pointer
 }
-#register_manga{
+#register_manga, #button-forgot{
 width:100%;
  padding:12px 0;
  border:none;   
@@ -23019,7 +23050,7 @@ width:100%;
  font-size:16px;
  font-weight:700;
  color:#56ccf2;
- text-decoration:underline
+ text-decoration:underline;
 }
 .modal.login-modal .modal-content .tabs-contents>div .social-login {
  margin-top:30px;
@@ -23276,6 +23307,10 @@ width:100%;
  position:absolute;
  left:-9999px
 }
+.messages input[type=checkbox] {
+ position:absolute;
+ left:-9999px
+}
 .messages input[type=radio]+label {
  position:relative;
  padding-left:35px;
@@ -23284,7 +23319,22 @@ width:100%;
  display:inline-block;
  color:#666
 }
+.messages input[type=checkbox]+label {
+ position:relative;
+ padding-left:35px;
+ cursor:pointer;
+ line-height:20px;
+ display:inline-block;
+ color:#666
+}
 .messages input[type=radio]+label[class*=collection-] {
+ padding:10px 0 10px 70px;
+ background-repeat:no-repeat;
+ background-size:22px 22px;
+ background-position:top 10px left 35px;
+ font-size:16px
+}
+.messages input[type=checkbox]+label[class*=collection-] {
  padding:10px 0 10px 70px;
  background-repeat:no-repeat;
  background-size:22px 22px;
@@ -23304,6 +23354,22 @@ width:100%;
  top:10px
 }
 .messages input[type=radio]+label[class*=collection-]::after {
+ content:'\2714';
+ top:12px
+}
+.messages input[type=checkbox]+label[class*=collection-].collection-01 {
+ background-image:url(../images/coll-paypal.png)
+}
+.messages input[type=checkbox]+label[class*=collection-].collection-02 {
+ background-image:url(../images/coll-bank.png)
+}
+.messages input[type=checkbox]+label[class*=collection-].collection-03 {
+ background-image:url(../images/coll-fpt.png)
+}
+.messages input[type=checkbox]+label[class*=collection-]::before {
+ top:10px
+}
+.messages input[type=checkbox]+label[class*=collection-]::after {
  content:'\2714';
  top:12px
 }
@@ -23330,6 +23396,33 @@ width:100%;
  background:#f18121
 }
 .messages input[type=radio]:checked+label::after {
+ opacity:1;
+ -webkit-transform:scale(1);
+ transform:scale(1)
+}
+.messages input[type=checkbox]+label::before {
+ content:'';
+ position:absolute;
+ left:0;
+ top:0;
+ width:24px;
+ height:24px;
+ border:1px solid #ddd;
+ border-radius:100%;
+ background:#fff
+}
+.messages input[type=checkbox]+label::after {
+ content:'\2714';
+ color:#fff;
+ position:absolute;
+ top:2px;
+ left:6px;
+ opacity:0
+}
+.messages input[type=checkbox]:checked+label::before {
+ background:#f18121
+}
+.messages input[type=checkbox]:checked+label::after {
  opacity:1;
  -webkit-transform:scale(1);
  transform:scale(1)
@@ -24282,7 +24375,12 @@ margin-bottom: 30px;
  width:420px;
  height:44px;
  position:relative;
- margin-left:80px
+ margin-left:60px
+}
+input#txtSearch.text-search {
+ /* width:420px; */
+ height:42px;
+ position:relative;
 }
 .on.top-bar .top-search input[type=text] {
  background-color:#f9f9f9;

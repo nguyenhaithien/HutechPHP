@@ -1,5 +1,12 @@
 <?php
-    include_once("header.php");
+// require_once("Controller/Manga.class.php");
+// require_once("Controller/Theloai.class.php");
+// require_once("Controller/timesince.php");
+?>
+<?php
+include_once("header.php");
+$danhsachmanga = Manga::DanhsachManga();
+
 ?>
 <?php
 //     require_once("route.php");
@@ -58,668 +65,133 @@
                 <a href="http://truyenqq.com/truyen-moi-cap-nhat.html"><span class="starts-icon"></span>Truyện mới cập nhật</a>
             </div>
             <ul class="list-stories grid-6">
-                <li>
-                    <div class="story-item">
-                        <a href="#"><img class="story-cover" src="/websitetruyen/FileCSSJS/assets/images/i-am-the-sorcerer-king.jpg" alt="Senpai Có Thích Đàn Em Bb (Big Boobs)" /></a>
-                        <div class="top-notice">
-                            <span class="time-ago">1 Phút Trước</span>
-                            <span class="type-label hot">Hot</span>
-                        </div>
-                        <h3 class="title-book">
-                            <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100">Senpai Có Thích Đàn Em Bb (Big Boob...</a>
-                        </h3>
-                        <div class="episode-book">
-                            <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100-chap-16.html">
-                                Chương 16</a>
-                        </div>
-                        <div class="more-info">
-                            <div class="title-more">
-                                Senpai Có Thích Đàn Em Bb (Big Boobs)
+                <?php
+                foreach ($danhsachmanga as $item) {
+                ?>
+                    <li>
+                        <div class="story-item">
+                            <a href="/websitetruyen/truyen.php?ma_truyen=<?php echo $item['IdManga'] ?>"><img class="story-cover" src="<?php echo "/websitetruyen/" . $item["Anh"]; ?>" alt="<?php echo $item["TenManga"]; ?>" /></a>
+                            <div class="top-notice">
+                                <span class="time-ago"><?php
+                                                        if ($item["NgayDang"] == NULL) {
+                                                            echo "1 phút";
+                                                        } else {
+
+                                                            // $date = date_create($item['NgayDang']);
+                                                            // echo get_time_ago(strtotime(date_format($date,'Y-m-d')));
+                                                            // echo humanTiming(strtotime($item['NgayDang']));
+                                                            echo get_time_ago(strtotime($item['NgayDang']));
+                                                        }
+                                                        ?></span>
+                                <!-- <span class="type-label new">New</span> -->
                             </div>
-                            <div class="title-more-other">
-                                Tên khác: Do You Like Big Juniors?; Bạn Có Thích Một
-                                Kouhai Bự Chảng?; S Ookii Kouhai Wa Suki Desu Ka
+                            <h3 class="title-book">
+                                <a href="/websitetruyen/truyen.php?ma_truyen=<?php echo $item['IdManga'] ?>"><?php echo $item["TenManga"]; ?></a>
+                            </h3>
+                            <div class="episode-book">
+                                <?php
+                                if ($item["KieuTruyen"] == "1") {
+                                ?>
+                                    <a href="/websitetruyen/chaptranh.php?machap=<?php echo $item['ChuongCuoi'] ?>">
+                                        <?php echo "Chương " . $item["ChuongCuoi"]; ?></a>
+                                <?php } else { ?>
+                                    <a href="/websitetruyen/chaptranh.php?machap=<?php echo $item['ChuongCuoi'] ?>">
+                                        <?php echo "Chương " . $item["ChuongCuoi"]; ?></a>
+                                <?php } ?>
                             </div>
-                            <p class="info">Tình trạng: Đang Cập Nhật</p>
-                            <p class="info">Lượt xem: 55,789</p>
-                            <p class="info">Lượt theo dõi: 750</p>
-                            <div class="list-tags">
-                                <a class="blue" href="http://truyenqq.com/the-loai/comedy-28.html">Comedy</a><a class="blue" href="http://truyenqq.com/the-loai/romance-36.html">Romance</a><a class="blue" href="http://truyenqq.com/the-loai/slice-of-life-46.html">Slice Of Life</a>
-                            </div>
-                            <div class="excerpt">
-                                Một kouhai hết mực cưng chiều senpai của mình? Một câu
-                                chuyện tình yêu đầy "Không cân xứng"!!
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.story-item -->
-                </li>
-                <li>
-                    <div class="story-item">
-                        <a href="#"><img class="story-cover" src="/websitetruyen/FileCSSJS/assets/images/i-am-the-sorcerer-king.jpg" alt="Senpai Có Thích Đàn Em Bb (Big Boobs)" /></a>
-                        <div class="top-notice">
-                            <span class="time-ago">1 Phút Trước</span>
-                            <span class="type-label new">New</span>
-                        </div>
-                        <h3 class="title-book">
-                            <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100">Senpai Có Thích Đàn Em Bb (Big Boob...</a>
-                        </h3>
-                        <div class="episode-book">
-                            <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100-chap-16.html">
-                                Chương 16</a>
-                        </div>
-                        <div class="more-info">
-                            <div class="title-more">
-                                Senpai Có Thích Đàn Em Bb (Big Boobs)
-                            </div>
-                            <div class="title-more-other">
-                                Tên khác: Do You Like Big Juniors?; Bạn Có Thích Một
-                                Kouhai Bự Chảng?; S Ookii Kouhai Wa Suki Desu Ka
-                            </div>
-                            <p class="info">Tình trạng: Đang Cập Nhật</p>
-                            <p class="info">Lượt xem: 55,789</p>
-                            <p class="info">Lượt theo dõi: 750</p>
-                            <div class="list-tags">
-                                <a class="blue" href="http://truyenqq.com/the-loai/comedy-28.html">Comedy</a><a class="blue" href="http://truyenqq.com/the-loai/romance-36.html">Romance</a><a class="blue" href="http://truyenqq.com/the-loai/slice-of-life-46.html">Slice Of Life</a>
-                            </div>
-                            <div class="excerpt">
-                                Một kouhai hết mực cưng chiều senpai của mình? Một câu
-                                chuyện tình yêu đầy "Không cân xứng"!!
+                            <div class="more-info">
+                                <div class="title-more">
+                                    <?php echo $item["TenManga"]; ?>
+                                </div>
+                                <div class="title-more-other">
+                                    Tên khác: <?php echo $item["TenKhac"] ?>
+                                </div>
+                                <p class="info">Tình trạng: Đang Cập Nhật</p>
+                                <p class="info">Lượt xem: 55,789</p>
+                                <p class="info">Lượt theo dõi: 750</p>
+                                <div class="list-tags">
+                                    <?php
+                                    $danhsachtheloai = Theloai::Theloaicuatruyen($item["IdManga"]);
+                                    foreach ($danhsachtheloai as $itemtl) {
+                                    ?>
+                                        <a class="blue" href="#"> <?php echo $itemtl["TenTheloai"]; ?></a>
+                                    <?php } ?>
+                                </div>
+                                <div class="excerpt">
+                                    <?php
+                                    echo substrwords($item["GioiThieu"], 200);
+                                    ?>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- /.story-item -->
-                </li>
-                <li>
-                    <div class="story-item">
-                        <a href="#"><img class="story-cover" src="/websitetruyen/FileCSSJS/assets/images/i-am-the-sorcerer-king.jpg" alt="Senpai Có Thích Đàn Em Bb (Big Boobs)" /></a>
-                        <div class="top-notice">
-                            <span class="time-ago">1 Phút Trước</span>
-                            <span class="type-label hot">Hot</span>
-                        </div>
-                        <h3 class="title-book">
-                            <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100">Senpai Có Thích Đàn Em Bb (Big Boob...</a>
-                        </h3>
-                        <div class="episode-book">
-                            <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100-chap-16.html">
-                                Chương 16</a>
-                        </div>
-                        <div class="more-info">
-                            <div class="title-more">
-                                Senpai Có Thích Đàn Em Bb (Big Boobs)
-                            </div>
-                            <div class="title-more-other">
-                                Tên khác: Do You Like Big Juniors?; Bạn Có Thích Một
-                                Kouhai Bự Chảng?; S Ookii Kouhai Wa Suki Desu Ka
-                            </div>
-                            <p class="info">Tình trạng: Đang Cập Nhật</p>
-                            <p class="info">Lượt xem: 55,789</p>
-                            <p class="info">Lượt theo dõi: 750</p>
-                            <div class="list-tags">
-                                <a class="blue" href="http://truyenqq.com/the-loai/comedy-28.html">Comedy</a><a class="blue" href="http://truyenqq.com/the-loai/romance-36.html">Romance</a><a class="blue" href="http://truyenqq.com/the-loai/slice-of-life-46.html">Slice Of Life</a>
-                            </div>
-                            <div class="excerpt">
-                                Một kouhai hết mực cưng chiều senpai của mình? Một câu
-                                chuyện tình yêu đầy "Không cân xứng"!!
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.story-item -->
-                </li>
-                <li>
-                    <div class="story-item">
-                        <a href="#"><img class="story-cover" src="/websitetruyen/FileCSSJS/assets/images/i-am-the-sorcerer-king.jpg" alt="Senpai Có Thích Đàn Em Bb (Big Boobs)" /></a>
-                        <div class="top-notice">
-                            <span class="time-ago">1 Phút Trước</span>
-                            <span class="type-label new">New</span>
-                        </div>
-                        <h3 class="title-book">
-                            <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100">Senpai Có Thích Đàn Em Bb (Big Boob...</a>
-                        </h3>
-                        <div class="episode-book">
-                            <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100-chap-16.html">
-                                Chương 16</a>
-                        </div>
-                        <div class="more-info">
-                            <div class="title-more">
-                                Senpai Có Thích Đàn Em Bb (Big Boobs)
-                            </div>
-                            <div class="title-more-other">
-                                Tên khác: Do You Like Big Juniors?; Bạn Có Thích Một
-                                Kouhai Bự Chảng?; S Ookii Kouhai Wa Suki Desu Ka
-                            </div>
-                            <p class="info">Tình trạng: Đang Cập Nhật</p>
-                            <p class="info">Lượt xem: 55,789</p>
-                            <p class="info">Lượt theo dõi: 750</p>
-                            <div class="list-tags">
-                                <a class="blue" href="http://truyenqq.com/the-loai/comedy-28.html">Comedy</a><a class="blue" href="http://truyenqq.com/the-loai/romance-36.html">Romance</a><a class="blue" href="http://truyenqq.com/the-loai/slice-of-life-46.html">Slice Of Life</a>
-                            </div>
-                            <div class="excerpt">
-                                Một kouhai hết mực cưng chiều senpai của mình? Một câu
-                                chuyện tình yêu đầy "Không cân xứng"!!
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.story-item -->
-                </li>
-                <li>
-                    <div class="story-item">
-                        <a href="#"><img class="story-cover" src="/websitetruyen/FileCSSJS/assets/images/i-am-the-sorcerer-king.jpg" alt="Senpai Có Thích Đàn Em Bb (Big Boobs)" /></a>
-                        <div class="top-notice">
-                            <span class="time-ago">1 Phút Trước</span>
-                            <span class="type-label hot">Hot</span>
-                        </div>
-                        <h3 class="title-book">
-                            <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100">Senpai Có Thích Đàn Em Bb (Big Boob...</a>
-                        </h3>
-                        <div class="episode-book">
-                            <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100-chap-16.html">
-                                Chương 16</a>
-                        </div>
-                        <div class="more-info">
-                            <div class="title-more">
-                                Senpai Có Thích Đàn Em Bb (Big Boobs)
-                            </div>
-                            <div class="title-more-other">
-                                Tên khác: Do You Like Big Juniors?; Bạn Có Thích Một
-                                Kouhai Bự Chảng?; S Ookii Kouhai Wa Suki Desu Ka
-                            </div>
-                            <p class="info">Tình trạng: Đang Cập Nhật</p>
-                            <p class="info">Lượt xem: 55,789</p>
-                            <p class="info">Lượt theo dõi: 750</p>
-                            <div class="list-tags">
-                                <a class="blue" href="http://truyenqq.com/the-loai/comedy-28.html">Comedy</a><a class="blue" href="http://truyenqq.com/the-loai/romance-36.html">Romance</a><a class="blue" href="http://truyenqq.com/the-loai/slice-of-life-46.html">Slice Of Life</a>
-                            </div>
-                            <div class="excerpt">
-                                Một kouhai hết mực cưng chiều senpai của mình? Một câu
-                                chuyện tình yêu đầy "Không cân xứng"!!
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.story-item -->
-                </li>
-                <li>
-                    <div class="story-item">
-                        <a href="#"><img class="story-cover" src="/websitetruyen/FileCSSJS/assets/images/i-am-the-sorcerer-king.jpg" alt="Senpai Có Thích Đàn Em Bb (Big Boobs)" /></a>
-                        <div class="top-notice">
-                            <span class="time-ago">1 Phút Trước</span>
-                            <span class="type-label new">New</span>
-                        </div>
-                        <h3 class="title-book">
-                            <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100">Senpai Có Thích Đàn Em Bb (Big Boob...</a>
-                        </h3>
-                        <div class="episode-book">
-                            <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100-chap-16.html">
-                                Chương 16</a>
-                        </div>
-                        <div class="more-info">
-                            <div class="title-more">
-                                Senpai Có Thích Đàn Em Bb (Big Boobs)
-                            </div>
-                            <div class="title-more-other">
-                                Tên khác: Do You Like Big Juniors?; Bạn Có Thích Một
-                                Kouhai Bự Chảng?; S Ookii Kouhai Wa Suki Desu Ka
-                            </div>
-                            <p class="info">Tình trạng: Đang Cập Nhật</p>
-                            <p class="info">Lượt xem: 55,789</p>
-                            <p class="info">Lượt theo dõi: 750</p>
-                            <div class="list-tags">
-                                <a class="blue" href="http://truyenqq.com/the-loai/comedy-28.html">Comedy</a><a class="blue" href="http://truyenqq.com/the-loai/romance-36.html">Romance</a><a class="blue" href="http://truyenqq.com/the-loai/slice-of-life-46.html">Slice Of Life</a>
-                            </div>
-                            <div class="excerpt">
-                                Một kouhai hết mực cưng chiều senpai của mình? Một câu
-                                chuyện tình yêu đầy "Không cân xứng"!!
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.story-item -->
-                </li>
-                <li>
-                    <div class="story-item">
-                        <a href="#"><img class="story-cover" src="/websitetruyen/FileCSSJS/assets/images/i-am-the-sorcerer-king.jpg" alt="Senpai Có Thích Đàn Em Bb (Big Boobs)" /></a>
-                        <div class="top-notice">
-                            <span class="time-ago">1 Phút Trước</span>
-                            <span class="type-label hot">Hot</span>
-                        </div>
-                        <h3 class="title-book">
-                            <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100">Senpai Có Thích Đàn Em Bb (Big Boob...</a>
-                        </h3>
-                        <div class="episode-book">
-                            <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100-chap-16.html">
-                                Chương 16</a>
-                        </div>
-                        <div class="more-info">
-                            <div class="title-more">
-                                Senpai Có Thích Đàn Em Bb (Big Boobs)
-                            </div>
-                            <div class="title-more-other">
-                                Tên khác: Do You Like Big Juniors?; Bạn Có Thích Một
-                                Kouhai Bự Chảng?; S Ookii Kouhai Wa Suki Desu Ka
-                            </div>
-                            <p class="info">Tình trạng: Đang Cập Nhật</p>
-                            <p class="info">Lượt xem: 55,789</p>
-                            <p class="info">Lượt theo dõi: 750</p>
-                            <div class="list-tags">
-                                <a class="blue" href="http://truyenqq.com/the-loai/comedy-28.html">Comedy</a><a class="blue" href="http://truyenqq.com/the-loai/romance-36.html">Romance</a><a class="blue" href="http://truyenqq.com/the-loai/slice-of-life-46.html">Slice Of Life</a>
-                            </div>
-                            <div class="excerpt">
-                                Một kouhai hết mực cưng chiều senpai của mình? Một câu
-                                chuyện tình yêu đầy "Không cân xứng"!!
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.story-item -->
-                </li>
-                <li>
-                    <div class="story-item">
-                        <a href="#"><img class="story-cover" src="/websitetruyen/FileCSSJS/assets/images/i-am-the-sorcerer-king.jpg" alt="Senpai Có Thích Đàn Em Bb (Big Boobs)" /></a>
-                        <div class="top-notice">
-                            <span class="time-ago">1 Phút Trước</span>
-                            <span class="type-label new">New</span>
-                        </div>
-                        <h3 class="title-book">
-                            <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100">Senpai Có Thích Đàn Em Bb (Big Boob...</a>
-                        </h3>
-                        <div class="episode-book">
-                            <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100-chap-16.html">
-                                Chương 16</a>
-                        </div>
-                        <div class="more-info">
-                            <div class="title-more">
-                                Senpai Có Thích Đàn Em Bb (Big Boobs)
-                            </div>
-                            <div class="title-more-other">
-                                Tên khác: Do You Like Big Juniors?; Bạn Có Thích Một
-                                Kouhai Bự Chảng?; S Ookii Kouhai Wa Suki Desu Ka
-                            </div>
-                            <p class="info">Tình trạng: Đang Cập Nhật</p>
-                            <p class="info">Lượt xem: 55,789</p>
-                            <p class="info">Lượt theo dõi: 750</p>
-                            <div class="list-tags">
-                                <a class="blue" href="http://truyenqq.com/the-loai/comedy-28.html">Comedy</a><a class="blue" href="http://truyenqq.com/the-loai/romance-36.html">Romance</a><a class="blue" href="http://truyenqq.com/the-loai/slice-of-life-46.html">Slice Of Life</a>
-                            </div>
-                            <div class="excerpt">
-                                Một kouhai hết mực cưng chiều senpai của mình? Một câu
-                                chuyện tình yêu đầy "Không cân xứng"!!
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.story-item -->
-                </li>
-                <li>
-                    <div class="story-item">
-                        <a href="#"><img class="story-cover" src="/websitetruyen/FileCSSJS/assets/images/i-am-the-sorcerer-king.jpg" alt="Senpai Có Thích Đàn Em Bb (Big Boobs)" /></a>
-                        <div class="top-notice">
-                            <span class="time-ago">1 Phút Trước</span>
-                            <span class="type-label hot">Hot</span>
-                        </div>
-                        <h3 class="title-book">
-                            <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100">Senpai Có Thích Đàn Em Bb (Big Boob...</a>
-                        </h3>
-                        <div class="episode-book">
-                            <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100-chap-16.html">
-                                Chương 16</a>
-                        </div>
-                        <div class="more-info">
-                            <div class="title-more">
-                                Senpai Có Thích Đàn Em Bb (Big Boobs)
-                            </div>
-                            <div class="title-more-other">
-                                Tên khác: Do You Like Big Juniors?; Bạn Có Thích Một
-                                Kouhai Bự Chảng?; S Ookii Kouhai Wa Suki Desu Ka
-                            </div>
-                            <p class="info">Tình trạng: Đang Cập Nhật</p>
-                            <p class="info">Lượt xem: 55,789</p>
-                            <p class="info">Lượt theo dõi: 750</p>
-                            <div class="list-tags">
-                                <a class="blue" href="http://truyenqq.com/the-loai/comedy-28.html">Comedy</a><a class="blue" href="http://truyenqq.com/the-loai/romance-36.html">Romance</a><a class="blue" href="http://truyenqq.com/the-loai/slice-of-life-46.html">Slice Of Life</a>
-                            </div>
-                            <div class="excerpt">
-                                Một kouhai hết mực cưng chiều senpai của mình? Một câu
-                                chuyện tình yêu đầy "Không cân xứng"!!
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.story-item -->
-                </li>
+                        <!-- /.story-item -->
+                    </li>
+                <?php
+                }
+                ?>
             </ul>
             <!-- /.list-stories -->
             <div class="has-text-centered">
-                <a href="http://truyenqq.com/truyen-moi-cap-nhat/trang-2.html" class="view-more-btn">Xem thêm nhiều truyện</a>
+                <a href="#" class="view-more-btn">Xem thêm nhiều truyện</a>
             </div>
         </div>
         <!-- /.latest -->
         <div class="female">
             <div class="caption" id="list-female">
-                <a href="http://truyenqq.com/truyen-con-gai.html"><span class="female-icon"></span>Truyện con gái</a>
+                <a href="http://truyenqq.com/truyen-con-gai.html"><span class="female-icon"></span>Truyện Tranh</a>
             </div>
             <div class="tile is-ancestor">
                 <div class="tile is-vertical is-parent">
                     <ul class="list-stories grid-6">
-                        <li>
-                            <div class="story-item">
-                                <a href="#"><img class="story-cover" src="/websitetruyen/FileCSSJS/assets/images/i-am-the-sorcerer-king.jpg" alt="Senpai Có Thích Đàn Em Bb (Big Boobs)" /></a>
-                                <div class="top-notice">
-                                    <span class="time-ago">1 Phút Trước</span>
-                                    <span class="type-label hot">Hot</span>
-                                </div>
-                                <h3 class="title-book">
-                                    <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100">Senpai Có Thích Đàn Em Bb (Big Boob...</a>
-                                </h3>
-                                <div class="episode-book">
-                                    <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100-chap-16.html">
-                                        Chương 16</a>
-                                </div>
-                                <div class="more-info">
-                                    <div class="title-more">
-                                        Senpai Có Thích Đàn Em Bb (Big Boobs)
+                        <?php
+                        foreach ($danhsachmanga as $item) {
+                            if ($item["KieuTruyen"] == "1") {
+                        ?>
+                                <li>
+                                    <div class="story-item">
+                                        <a href="/websitetruyen/truyen.php?ma_truyen=<?php echo $item['IdManga'] ?>"><img class="story-cover" src="<?php echo "/websitetruyen/" . $item["Anh"]; ?>" alt="<?php echo $item["TenManga"]; ?>" /></a>
+                                        <div class="top-notice">
+                                            <span class="time-ago">1 Phút Trước</span>
+                                            <span class="type-label hot">Hot</span>
+                                        </div>
+                                        <h3 class="title-book">
+                                            <a href="/websitetruyen/truyen.php?ma_truyen=<?php echo $item['IdManga'] ?>"><?php echo $item["TenManga"]; ?></a>
+                                        </h3>
+                                        <div class="episode-book">
+                                            <a href="/websitetruyen/truyen.php?ma_truyen=<?php echo $item['IdManga'] ?>">
+                                                <?php echo "Chương " . $item["ChuongCuoi"]; ?></a>
+                                        </div>
+                                        <div class="more-info">
+                                            <div class="title-more">
+                                                <?php echo $item["TenManga"]; ?>
+                                            </div>
+                                            <div class="title-more-other">
+                                                Tên khác: <?php echo $item["TenKhac"] ?>
+                                            </div>
+                                            <p class="info">Tình trạng: Đang Cập Nhật</p>
+                                            <p class="info">Lượt xem: 55,789</p>
+                                            <p class="info">Lượt theo dõi: 750</p>
+                                            <div class="list-tags">
+                                                <?php
+                                                $danhsachtheloai = Theloai::Theloaicuatruyen($item["IdManga"]);
+                                                foreach ($danhsachtheloai as $itemtl) {
+                                                ?>
+                                                    <a class="blue" href="#"> <?php echo $itemtl["TenTheloai"]; ?></a>
+                                                <?php } ?>
+                                            </div>
+                                            <div class="excerpt">
+                                                <?php
+                                                echo substrwords($item["GioiThieu"], 200);
+                                                ?>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="title-more-other">
-                                        Tên khác: Do You Like Big Juniors?; Bạn Có Thích Một
-                                        Kouhai Bự Chảng?; S Ookii Kouhai Wa Suki Desu Ka
-                                    </div>
-                                    <p class="info">Tình trạng: Đang Cập Nhật</p>
-                                    <p class="info">Lượt xem: 55,789</p>
-                                    <p class="info">Lượt theo dõi: 750</p>
-                                    <div class="list-tags">
-                                        <a class="blue" href="http://truyenqq.com/the-loai/comedy-28.html">Comedy</a><a class="blue" href="http://truyenqq.com/the-loai/romance-36.html">Romance</a><a class="blue" href="http://truyenqq.com/the-loai/slice-of-life-46.html">Slice Of Life</a>
-                                    </div>
-                                    <div class="excerpt">
-                                        Một kouhai hết mực cưng chiều senpai của mình? Một câu
-                                        chuyện tình yêu đầy "Không cân xứng"!!
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /.story-item -->
-                        </li>
-                        <li>
-                            <div class="story-item">
-                                <a href="#"><img class="story-cover" src="/websitetruyen/FileCSSJS/assets/images/i-am-the-sorcerer-king.jpg" alt="Senpai Có Thích Đàn Em Bb (Big Boobs)" /></a>
-                                <div class="top-notice">
-                                    <span class="time-ago">1 Phút Trước</span>
-                                    <span class="type-label new">New</span>
-                                </div>
-                                <h3 class="title-book">
-                                    <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100">Senpai Có Thích Đàn Em Bb (Big Boob...</a>
-                                </h3>
-                                <div class="episode-book">
-                                    <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100-chap-16.html">
-                                        Chương 16</a>
-                                </div>
-                                <div class="more-info">
-                                    <div class="title-more">
-                                        Senpai Có Thích Đàn Em Bb (Big Boobs)
-                                    </div>
-                                    <div class="title-more-other">
-                                        Tên khác: Do You Like Big Juniors?; Bạn Có Thích Một
-                                        Kouhai Bự Chảng?; S Ookii Kouhai Wa Suki Desu Ka
-                                    </div>
-                                    <p class="info">Tình trạng: Đang Cập Nhật</p>
-                                    <p class="info">Lượt xem: 55,789</p>
-                                    <p class="info">Lượt theo dõi: 750</p>
-                                    <div class="list-tags">
-                                        <a class="blue" href="http://truyenqq.com/the-loai/comedy-28.html">Comedy</a><a class="blue" href="http://truyenqq.com/the-loai/romance-36.html">Romance</a><a class="blue" href="http://truyenqq.com/the-loai/slice-of-life-46.html">Slice Of Life</a>
-                                    </div>
-                                    <div class="excerpt">
-                                        Một kouhai hết mực cưng chiều senpai của mình? Một câu
-                                        chuyện tình yêu đầy "Không cân xứng"!!
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /.story-item -->
-                        </li>
-                        <li>
-                            <div class="story-item">
-                                <a href="#"><img class="story-cover" src="/websitetruyen/FileCSSJS/assets/images/i-am-the-sorcerer-king.jpg" alt="Senpai Có Thích Đàn Em Bb (Big Boobs)" /></a>
-                                <div class="top-notice">
-                                    <span class="time-ago">1 Phút Trước</span>
-                                    <span class="type-label hot">Hot</span>
-                                </div>
-                                <h3 class="title-book">
-                                    <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100">Senpai Có Thích Đàn Em Bb (Big Boob...</a>
-                                </h3>
-                                <div class="episode-book">
-                                    <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100-chap-16.html">
-                                        Chương 16</a>
-                                </div>
-                                <div class="more-info">
-                                    <div class="title-more">
-                                        Senpai Có Thích Đàn Em Bb (Big Boobs)
-                                    </div>
-                                    <div class="title-more-other">
-                                        Tên khác: Do You Like Big Juniors?; Bạn Có Thích Một
-                                        Kouhai Bự Chảng?; S Ookii Kouhai Wa Suki Desu Ka
-                                    </div>
-                                    <p class="info">Tình trạng: Đang Cập Nhật</p>
-                                    <p class="info">Lượt xem: 55,789</p>
-                                    <p class="info">Lượt theo dõi: 750</p>
-                                    <div class="list-tags">
-                                        <a class="blue" href="http://truyenqq.com/the-loai/comedy-28.html">Comedy</a><a class="blue" href="http://truyenqq.com/the-loai/romance-36.html">Romance</a><a class="blue" href="http://truyenqq.com/the-loai/slice-of-life-46.html">Slice Of Life</a>
-                                    </div>
-                                    <div class="excerpt">
-                                        Một kouhai hết mực cưng chiều senpai của mình? Một câu
-                                        chuyện tình yêu đầy "Không cân xứng"!!
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /.story-item -->
-                        </li>
-                        <li>
-                            <div class="story-item">
-                                <a href="#"><img class="story-cover" src="/websitetruyen/FileCSSJS/assets/images/i-am-the-sorcerer-king.jpg" alt="Senpai Có Thích Đàn Em Bb (Big Boobs)" /></a>
-                                <div class="top-notice">
-                                    <span class="time-ago">1 Phút Trước</span>
-                                    <span class="type-label new">New</span>
-                                </div>
-                                <h3 class="title-book">
-                                    <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100">Senpai Có Thích Đàn Em Bb (Big Boob...</a>
-                                </h3>
-                                <div class="episode-book">
-                                    <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100-chap-16.html">
-                                        Chương 16</a>
-                                </div>
-                                <div class="more-info">
-                                    <div class="title-more">
-                                        Senpai Có Thích Đàn Em Bb (Big Boobs)
-                                    </div>
-                                    <div class="title-more-other">
-                                        Tên khác: Do You Like Big Juniors?; Bạn Có Thích Một
-                                        Kouhai Bự Chảng?; S Ookii Kouhai Wa Suki Desu Ka
-                                    </div>
-                                    <p class="info">Tình trạng: Đang Cập Nhật</p>
-                                    <p class="info">Lượt xem: 55,789</p>
-                                    <p class="info">Lượt theo dõi: 750</p>
-                                    <div class="list-tags">
-                                        <a class="blue" href="http://truyenqq.com/the-loai/comedy-28.html">Comedy</a><a class="blue" href="http://truyenqq.com/the-loai/romance-36.html">Romance</a><a class="blue" href="http://truyenqq.com/the-loai/slice-of-life-46.html">Slice Of Life</a>
-                                    </div>
-                                    <div class="excerpt">
-                                        Một kouhai hết mực cưng chiều senpai của mình? Một câu
-                                        chuyện tình yêu đầy "Không cân xứng"!!
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /.story-item -->
-                        </li>
-                        <li>
-                            <div class="story-item">
-                                <a href="#"><img class="story-cover" src="/websitetruyen/FileCSSJS/assets/images/i-am-the-sorcerer-king.jpg" alt="Senpai Có Thích Đàn Em Bb (Big Boobs)" /></a>
-                                <div class="top-notice">
-                                    <span class="time-ago">1 Phút Trước</span>
-                                    <span class="type-label hot">Hot</span>
-                                </div>
-                                <h3 class="title-book">
-                                    <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100">Senpai Có Thích Đàn Em Bb (Big Boob...</a>
-                                </h3>
-                                <div class="episode-book">
-                                    <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100-chap-16.html">
-                                        Chương 16</a>
-                                </div>
-                                <div class="more-info">
-                                    <div class="title-more">
-                                        Senpai Có Thích Đàn Em Bb (Big Boobs)
-                                    </div>
-                                    <div class="title-more-other">
-                                        Tên khác: Do You Like Big Juniors?; Bạn Có Thích Một
-                                        Kouhai Bự Chảng?; S Ookii Kouhai Wa Suki Desu Ka
-                                    </div>
-                                    <p class="info">Tình trạng: Đang Cập Nhật</p>
-                                    <p class="info">Lượt xem: 55,789</p>
-                                    <p class="info">Lượt theo dõi: 750</p>
-                                    <div class="list-tags">
-                                        <a class="blue" href="http://truyenqq.com/the-loai/comedy-28.html">Comedy</a><a class="blue" href="http://truyenqq.com/the-loai/romance-36.html">Romance</a><a class="blue" href="http://truyenqq.com/the-loai/slice-of-life-46.html">Slice Of Life</a>
-                                    </div>
-                                    <div class="excerpt">
-                                        Một kouhai hết mực cưng chiều senpai của mình? Một câu
-                                        chuyện tình yêu đầy "Không cân xứng"!!
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /.story-item -->
-                        </li>
-                        <li>
-                            <div class="story-item">
-                                <a href="#"><img class="story-cover" src="/websitetruyen/FileCSSJS/assets/images/i-am-the-sorcerer-king.jpg" alt="Senpai Có Thích Đàn Em Bb (Big Boobs)" /></a>
-                                <div class="top-notice">
-                                    <span class="time-ago">1 Phút Trước</span>
-                                    <span class="type-label new">New</span>
-                                </div>
-                                <h3 class="title-book">
-                                    <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100">Senpai Có Thích Đàn Em Bb (Big Boob...</a>
-                                </h3>
-                                <div class="episode-book">
-                                    <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100-chap-16.html">
-                                        Chương 16</a>
-                                </div>
-                                <div class="more-info">
-                                    <div class="title-more">
-                                        Senpai Có Thích Đàn Em Bb (Big Boobs)
-                                    </div>
-                                    <div class="title-more-other">
-                                        Tên khác: Do You Like Big Juniors?; Bạn Có Thích Một
-                                        Kouhai Bự Chảng?; S Ookii Kouhai Wa Suki Desu Ka
-                                    </div>
-                                    <p class="info">Tình trạng: Đang Cập Nhật</p>
-                                    <p class="info">Lượt xem: 55,789</p>
-                                    <p class="info">Lượt theo dõi: 750</p>
-                                    <div class="list-tags">
-                                        <a class="blue" href="http://truyenqq.com/the-loai/comedy-28.html">Comedy</a><a class="blue" href="http://truyenqq.com/the-loai/romance-36.html">Romance</a><a class="blue" href="http://truyenqq.com/the-loai/slice-of-life-46.html">Slice Of Life</a>
-                                    </div>
-                                    <div class="excerpt">
-                                        Một kouhai hết mực cưng chiều senpai của mình? Một câu
-                                        chuyện tình yêu đầy "Không cân xứng"!!
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /.story-item -->
-                        </li>
-                        <li>
-                            <div class="story-item">
-                                <a href="#"><img class="story-cover" src="/websitetruyen/FileCSSJS/assets/images/i-am-the-sorcerer-king.jpg" alt="Senpai Có Thích Đàn Em Bb (Big Boobs)" /></a>
-                                <div class="top-notice">
-                                    <span class="time-ago">1 Phút Trước</span>
-                                    <span class="type-label hot">Hot</span>
-                                </div>
-                                <h3 class="title-book">
-                                    <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100">Senpai Có Thích Đàn Em Bb (Big Boob...</a>
-                                </h3>
-                                <div class="episode-book">
-                                    <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100-chap-16.html">
-                                        Chương 16</a>
-                                </div>
-                                <div class="more-info">
-                                    <div class="title-more">
-                                        Senpai Có Thích Đàn Em Bb (Big Boobs)
-                                    </div>
-                                    <div class="title-more-other">
-                                        Tên khác: Do You Like Big Juniors?; Bạn Có Thích Một
-                                        Kouhai Bự Chảng?; S Ookii Kouhai Wa Suki Desu Ka
-                                    </div>
-                                    <p class="info">Tình trạng: Đang Cập Nhật</p>
-                                    <p class="info">Lượt xem: 55,789</p>
-                                    <p class="info">Lượt theo dõi: 750</p>
-                                    <div class="list-tags">
-                                        <a class="blue" href="http://truyenqq.com/the-loai/comedy-28.html">Comedy</a><a class="blue" href="http://truyenqq.com/the-loai/romance-36.html">Romance</a><a class="blue" href="http://truyenqq.com/the-loai/slice-of-life-46.html">Slice Of Life</a>
-                                    </div>
-                                    <div class="excerpt">
-                                        Một kouhai hết mực cưng chiều senpai của mình? Một câu
-                                        chuyện tình yêu đầy "Không cân xứng"!!
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /.story-item -->
-                        </li>
-                        <li>
-                            <div class="story-item">
-                                <a href="#"><img class="story-cover" src="/websitetruyen/FileCSSJS/assets/images/i-am-the-sorcerer-king.jpg" alt="Senpai Có Thích Đàn Em Bb (Big Boobs)" /></a>
-                                <div class="top-notice">
-                                    <span class="time-ago">1 Phút Trước</span>
-                                    <span class="type-label new">New</span>
-                                </div>
-                                <h3 class="title-book">
-                                    <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100">Senpai Có Thích Đàn Em Bb (Big Boob...</a>
-                                </h3>
-                                <div class="episode-book">
-                                    <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100-chap-16.html">
-                                        Chương 16</a>
-                                </div>
-                                <div class="more-info">
-                                    <div class="title-more">
-                                        Senpai Có Thích Đàn Em Bb (Big Boobs)
-                                    </div>
-                                    <div class="title-more-other">
-                                        Tên khác: Do You Like Big Juniors?; Bạn Có Thích Một
-                                        Kouhai Bự Chảng?; S Ookii Kouhai Wa Suki Desu Ka
-                                    </div>
-                                    <p class="info">Tình trạng: Đang Cập Nhật</p>
-                                    <p class="info">Lượt xem: 55,789</p>
-                                    <p class="info">Lượt theo dõi: 750</p>
-                                    <div class="list-tags">
-                                        <a class="blue" href="http://truyenqq.com/the-loai/comedy-28.html">Comedy</a><a class="blue" href="http://truyenqq.com/the-loai/romance-36.html">Romance</a><a class="blue" href="http://truyenqq.com/the-loai/slice-of-life-46.html">Slice Of Life</a>
-                                    </div>
-                                    <div class="excerpt">
-                                        Một kouhai hết mực cưng chiều senpai của mình? Một câu
-                                        chuyện tình yêu đầy "Không cân xứng"!!
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /.story-item -->
-                        </li>
-                        <li>
-                            <div class="story-item">
-                                <a href="#"><img class="story-cover" src="/websitetruyen/FileCSSJS/assets/images/i-am-the-sorcerer-king.jpg" alt="Senpai Có Thích Đàn Em Bb (Big Boobs)" /></a>
-                                <div class="top-notice">
-                                    <span class="time-ago">1 Phút Trước</span>
-                                    <span class="type-label hot">Hot</span>
-                                </div>
-                                <h3 class="title-book">
-                                    <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100">Senpai Có Thích Đàn Em Bb (Big Boob...</a>
-                                </h3>
-                                <div class="episode-book">
-                                    <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100-chap-16.html">
-                                        Chương 16</a>
-                                </div>
-                                <div class="more-info">
-                                    <div class="title-more">
-                                        Senpai Có Thích Đàn Em Bb (Big Boobs)
-                                    </div>
-                                    <div class="title-more-other">
-                                        Tên khác: Do You Like Big Juniors?; Bạn Có Thích Một
-                                        Kouhai Bự Chảng?; S Ookii Kouhai Wa Suki Desu Ka
-                                    </div>
-                                    <p class="info">Tình trạng: Đang Cập Nhật</p>
-                                    <p class="info">Lượt xem: 55,789</p>
-                                    <p class="info">Lượt theo dõi: 750</p>
-                                    <div class="list-tags">
-                                        <a class="blue" href="http://truyenqq.com/the-loai/comedy-28.html">Comedy</a><a class="blue" href="http://truyenqq.com/the-loai/romance-36.html">Romance</a><a class="blue" href="http://truyenqq.com/the-loai/slice-of-life-46.html">Slice Of Life</a>
-                                    </div>
-                                    <div class="excerpt">
-                                        Một kouhai hết mực cưng chiều senpai của mình? Một câu
-                                        chuyện tình yêu đầy "Không cân xứng"!!
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /.story-item -->
-                        </li>
+                                    <!-- /.story-item -->
+                                </li>
+                        <?php
+                            }
+                        }
+                        ?>
                     </ul>
                     <!-- /.list-stories -->
                     <div class="has-text-centered">
@@ -731,337 +203,65 @@
         <!-- /.female -->
         <div class="male">
             <div class="caption" id="list-male">
-                <a href="http://truyenqq.com/truyen-con-trai.html"><span class="male-icon"></span>Truyện con trai</a>
+                <a href="http://truyenqq.com/truyen-con-trai.html"><span class="male-icon"></span>Truyện Chữ</a>
             </div>
             <div class="tile is-ancestor">
                 <div class="tile is-vertical is-parent">
                     <ul class="list-stories grid-6">
-                        <li>
-                            <div class="story-item">
-                                <a href="#"><img class="story-cover" src="/websitetruyen/FileCSSJS/assets/images/i-am-the-sorcerer-king.jpg" alt="Senpai Có Thích Đàn Em Bb (Big Boobs)" /></a>
-                                <div class="top-notice">
-                                    <span class="time-ago">1 Phút Trước</span>
-                                    <span class="type-label hot">Hot</span>
-                                </div>
-                                <h3 class="title-book">
-                                    <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100">Senpai Có Thích Đàn Em Bb (Big Boob...</a>
-                                </h3>
-                                <div class="episode-book">
-                                    <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100-chap-16.html">
-                                        Chương 16</a>
-                                </div>
-                                <div class="more-info">
-                                    <div class="title-more">
-                                        Senpai Có Thích Đàn Em Bb (Big Boobs)
+                        <?php
+                        foreach ($danhsachmanga as $item) {
+                            if ($item["KieuTruyen"] == "2") {
+                        ?>
+                                <li>
+                                    <div class="story-item">
+                                        <a href="/websitetruyen/truyen.php?ma_truyen=<?php echo $item['IdManga'] ?>"><img class="story-cover" src="<?php echo "/websitetruyen/" . $item["Anh"]; ?>" alt="<?php echo $item["TenManga"]; ?>" /></a>
+                                        <div class="top-notice">
+                                            <span class="time-ago">1 Phút Trước</span>
+                                            <span class="type-label hot">Hot</span>
+                                        </div>
+                                        <h3 class="title-book">
+                                            <a href="/websitetruyen/truyen.php?ma_truyen=<?php echo $item['IdManga'] ?>"><?php echo $item["TenManga"]; ?></a>
+                                        </h3>
+                                        <div class="episode-book">
+                                            <a href="/websitetruyen/truyen.php?ma_truyen=<?php echo $item['IdManga'] ?>">
+                                                <?php echo "Chương " . $item["ChuongCuoi"]; ?></a>
+                                        </div>
+                                        <div class="more-info">
+                                            <div class="title-more">
+                                                <?php echo $item["TenManga"]; ?>
+                                            </div>
+                                            <div class="title-more-other">
+                                                Tên khác: <?php echo $item["TenKhac"] ?>
+                                            </div>
+                                            <p class="info">Tình trạng: Đang Cập Nhật</p>
+                                            <p class="info">Lượt xem: 55,789</p>
+                                            <p class="info">Lượt theo dõi: 750</p>
+                                            <div class="list-tags">
+                                                <?php
+                                                $danhsachtheloai = Theloai::Theloaicuatruyen($item["IdManga"]);
+                                                foreach ($danhsachtheloai as $itemtl) {
+                                                ?>
+                                                    <a class="blue" href="#"> <?php echo $itemtl["TenTheloai"]; ?></a>
+                                                <?php } ?>
+                                            </div>
+                                            <div class="excerpt">
+                                                <?php
+                                                echo substrwords($item["GioiThieu"], 200);
+                                                ?>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="title-more-other">
-                                        Tên khác: Do You Like Big Juniors?; Bạn Có Thích Một
-                                        Kouhai Bự Chảng?; S Ookii Kouhai Wa Suki Desu Ka
-                                    </div>
-                                    <p class="info">Tình trạng: Đang Cập Nhật</p>
-                                    <p class="info">Lượt xem: 55,789</p>
-                                    <p class="info">Lượt theo dõi: 750</p>
-                                    <div class="list-tags">
-                                        <a class="blue" href="http://truyenqq.com/the-loai/comedy-28.html">Comedy</a><a class="blue" href="http://truyenqq.com/the-loai/romance-36.html">Romance</a><a class="blue" href="http://truyenqq.com/the-loai/slice-of-life-46.html">Slice Of Life</a>
-                                    </div>
-                                    <div class="excerpt">
-                                        Một kouhai hết mực cưng chiều senpai của mình? Một câu
-                                        chuyện tình yêu đầy "Không cân xứng"!!
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /.story-item -->
-                        </li>
-                        <li>
-                            <div class="story-item">
-                                <a href="#"><img class="story-cover" src="/websitetruyen/FileCSSJS/assets/images/i-am-the-sorcerer-king.jpg" alt="Senpai Có Thích Đàn Em Bb (Big Boobs)" /></a>
-                                <div class="top-notice">
-                                    <span class="time-ago">1 Phút Trước</span>
-                                    <span class="type-label new">New</span>
-                                </div>
-                                <h3 class="title-book">
-                                    <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100">Senpai Có Thích Đàn Em Bb (Big Boob...</a>
-                                </h3>
-                                <div class="episode-book">
-                                    <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100-chap-16.html">
-                                        Chương 16</a>
-                                </div>
-                                <div class="more-info">
-                                    <div class="title-more">
-                                        Senpai Có Thích Đàn Em Bb (Big Boobs)
-                                    </div>
-                                    <div class="title-more-other">
-                                        Tên khác: Do You Like Big Juniors?; Bạn Có Thích Một
-                                        Kouhai Bự Chảng?; S Ookii Kouhai Wa Suki Desu Ka
-                                    </div>
-                                    <p class="info">Tình trạng: Đang Cập Nhật</p>
-                                    <p class="info">Lượt xem: 55,789</p>
-                                    <p class="info">Lượt theo dõi: 750</p>
-                                    <div class="list-tags">
-                                        <a class="blue" href="http://truyenqq.com/the-loai/comedy-28.html">Comedy</a><a class="blue" href="http://truyenqq.com/the-loai/romance-36.html">Romance</a><a class="blue" href="http://truyenqq.com/the-loai/slice-of-life-46.html">Slice Of Life</a>
-                                    </div>
-                                    <div class="excerpt">
-                                        Một kouhai hết mực cưng chiều senpai của mình? Một câu
-                                        chuyện tình yêu đầy "Không cân xứng"!!
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /.story-item -->
-                        </li>
-                        <li>
-                            <div class="story-item">
-                                <a href="#"><img class="story-cover" src="/websitetruyen/FileCSSJS/assets/images/i-am-the-sorcerer-king.jpg" alt="Senpai Có Thích Đàn Em Bb (Big Boobs)" /></a>
-                                <div class="top-notice">
-                                    <span class="time-ago">1 Phút Trước</span>
-                                    <span class="type-label hot">Hot</span>
-                                </div>
-                                <h3 class="title-book">
-                                    <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100">Senpai Có Thích Đàn Em Bb (Big Boob...</a>
-                                </h3>
-                                <div class="episode-book">
-                                    <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100-chap-16.html">
-                                        Chương 16</a>
-                                </div>
-                                <div class="more-info">
-                                    <div class="title-more">
-                                        Senpai Có Thích Đàn Em Bb (Big Boobs)
-                                    </div>
-                                    <div class="title-more-other">
-                                        Tên khác: Do You Like Big Juniors?; Bạn Có Thích Một
-                                        Kouhai Bự Chảng?; S Ookii Kouhai Wa Suki Desu Ka
-                                    </div>
-                                    <p class="info">Tình trạng: Đang Cập Nhật</p>
-                                    <p class="info">Lượt xem: 55,789</p>
-                                    <p class="info">Lượt theo dõi: 750</p>
-                                    <div class="list-tags">
-                                        <a class="blue" href="http://truyenqq.com/the-loai/comedy-28.html">Comedy</a><a class="blue" href="http://truyenqq.com/the-loai/romance-36.html">Romance</a><a class="blue" href="http://truyenqq.com/the-loai/slice-of-life-46.html">Slice Of Life</a>
-                                    </div>
-                                    <div class="excerpt">
-                                        Một kouhai hết mực cưng chiều senpai của mình? Một câu
-                                        chuyện tình yêu đầy "Không cân xứng"!!
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /.story-item -->
-                        </li>
-                        <li>
-                            <div class="story-item">
-                                <a href="#"><img class="story-cover" src="/websitetruyen/FileCSSJS/assets/images/i-am-the-sorcerer-king.jpg" alt="Senpai Có Thích Đàn Em Bb (Big Boobs)" /></a>
-                                <div class="top-notice">
-                                    <span class="time-ago">1 Phút Trước</span>
-                                    <span class="type-label new">New</span>
-                                </div>
-                                <h3 class="title-book">
-                                    <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100">Senpai Có Thích Đàn Em Bb (Big Boob...</a>
-                                </h3>
-                                <div class="episode-book">
-                                    <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100-chap-16.html">
-                                        Chương 16</a>
-                                </div>
-                                <div class="more-info">
-                                    <div class="title-more">
-                                        Senpai Có Thích Đàn Em Bb (Big Boobs)
-                                    </div>
-                                    <div class="title-more-other">
-                                        Tên khác: Do You Like Big Juniors?; Bạn Có Thích Một
-                                        Kouhai Bự Chảng?; S Ookii Kouhai Wa Suki Desu Ka
-                                    </div>
-                                    <p class="info">Tình trạng: Đang Cập Nhật</p>
-                                    <p class="info">Lượt xem: 55,789</p>
-                                    <p class="info">Lượt theo dõi: 750</p>
-                                    <div class="list-tags">
-                                        <a class="blue" href="http://truyenqq.com/the-loai/comedy-28.html">Comedy</a><a class="blue" href="http://truyenqq.com/the-loai/romance-36.html">Romance</a><a class="blue" href="http://truyenqq.com/the-loai/slice-of-life-46.html">Slice Of Life</a>
-                                    </div>
-                                    <div class="excerpt">
-                                        Một kouhai hết mực cưng chiều senpai của mình? Một câu
-                                        chuyện tình yêu đầy "Không cân xứng"!!
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /.story-item -->
-                        </li>
-                        <li>
-                            <div class="story-item">
-                                <a href="#"><img class="story-cover" src="/websitetruyen/FileCSSJS/assets/images/i-am-the-sorcerer-king.jpg" alt="Senpai Có Thích Đàn Em Bb (Big Boobs)" /></a>
-                                <div class="top-notice">
-                                    <span class="time-ago">1 Phút Trước</span>
-                                    <span class="type-label hot">Hot</span>
-                                </div>
-                                <h3 class="title-book">
-                                    <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100">Senpai Có Thích Đàn Em Bb (Big Boob...</a>
-                                </h3>
-                                <div class="episode-book">
-                                    <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100-chap-16.html">
-                                        Chương 16</a>
-                                </div>
-                                <div class="more-info">
-                                    <div class="title-more">
-                                        Senpai Có Thích Đàn Em Bb (Big Boobs)
-                                    </div>
-                                    <div class="title-more-other">
-                                        Tên khác: Do You Like Big Juniors?; Bạn Có Thích Một
-                                        Kouhai Bự Chảng?; S Ookii Kouhai Wa Suki Desu Ka
-                                    </div>
-                                    <p class="info">Tình trạng: Đang Cập Nhật</p>
-                                    <p class="info">Lượt xem: 55,789</p>
-                                    <p class="info">Lượt theo dõi: 750</p>
-                                    <div class="list-tags">
-                                        <a class="blue" href="http://truyenqq.com/the-loai/comedy-28.html">Comedy</a><a class="blue" href="http://truyenqq.com/the-loai/romance-36.html">Romance</a><a class="blue" href="http://truyenqq.com/the-loai/slice-of-life-46.html">Slice Of Life</a>
-                                    </div>
-                                    <div class="excerpt">
-                                        Một kouhai hết mực cưng chiều senpai của mình? Một câu
-                                        chuyện tình yêu đầy "Không cân xứng"!!
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /.story-item -->
-                        </li>
-                        <li>
-                            <div class="story-item">
-                                <a href="#"><img class="story-cover" src="/websitetruyen/FileCSSJS/assets/images/i-am-the-sorcerer-king.jpg" alt="Senpai Có Thích Đàn Em Bb (Big Boobs)" /></a>
-                                <div class="top-notice">
-                                    <span class="time-ago">1 Phút Trước</span>
-                                    <span class="type-label new">New</span>
-                                </div>
-                                <h3 class="title-book">
-                                    <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100">Senpai Có Thích Đàn Em Bb (Big Boob...</a>
-                                </h3>
-                                <div class="episode-book">
-                                    <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100-chap-16.html">
-                                        Chương 16</a>
-                                </div>
-                                <div class="more-info">
-                                    <div class="title-more">
-                                        Senpai Có Thích Đàn Em Bb (Big Boobs)
-                                    </div>
-                                    <div class="title-more-other">
-                                        Tên khác: Do You Like Big Juniors?; Bạn Có Thích Một
-                                        Kouhai Bự Chảng?; S Ookii Kouhai Wa Suki Desu Ka
-                                    </div>
-                                    <p class="info">Tình trạng: Đang Cập Nhật</p>
-                                    <p class="info">Lượt xem: 55,789</p>
-                                    <p class="info">Lượt theo dõi: 750</p>
-                                    <div class="list-tags">
-                                        <a class="blue" href="http://truyenqq.com/the-loai/comedy-28.html">Comedy</a><a class="blue" href="http://truyenqq.com/the-loai/romance-36.html">Romance</a><a class="blue" href="http://truyenqq.com/the-loai/slice-of-life-46.html">Slice Of Life</a>
-                                    </div>
-                                    <div class="excerpt">
-                                        Một kouhai hết mực cưng chiều senpai của mình? Một câu
-                                        chuyện tình yêu đầy "Không cân xứng"!!
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /.story-item -->
-                        </li>
-                        <li>
-                            <div class="story-item">
-                                <a href="#"><img class="story-cover" src="/websitetruyen/FileCSSJS/assets/images/i-am-the-sorcerer-king.jpg" alt="Senpai Có Thích Đàn Em Bb (Big Boobs)" /></a>
-                                <div class="top-notice">
-                                    <span class="time-ago">1 Phút Trước</span>
-                                    <span class="type-label hot">Hot</span>
-                                </div>
-                                <h3 class="title-book">
-                                    <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100">Senpai Có Thích Đàn Em Bb (Big Boob...</a>
-                                </h3>
-                                <div class="episode-book">
-                                    <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100-chap-16.html">
-                                        Chương 16</a>
-                                </div>
-                                <div class="more-info">
-                                    <div class="title-more">
-                                        Senpai Có Thích Đàn Em Bb (Big Boobs)
-                                    </div>
-                                    <div class="title-more-other">
-                                        Tên khác: Do You Like Big Juniors?; Bạn Có Thích Một
-                                        Kouhai Bự Chảng?; S Ookii Kouhai Wa Suki Desu Ka
-                                    </div>
-                                    <p class="info">Tình trạng: Đang Cập Nhật</p>
-                                    <p class="info">Lượt xem: 55,789</p>
-                                    <p class="info">Lượt theo dõi: 750</p>
-                                    <div class="list-tags">
-                                        <a class="blue" href="#">Comedy</a><a class="blue" href="#">Romance</a><a class="blue" href="http://truyenqq.com/the-loai/slice-of-life-46.html">Slice Of Life</a>
-                                    </div>
-                                    <div class="excerpt">
-                                        Một kouhai hết mực cưng chiều senpai của mình? Một câu
-                                        chuyện tình yêu đầy "Không cân xứng"!!
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /.story-item -->
-                        </li>
-                        <li>
-                            <div class="story-item">
-                                <a href="#"><img class="story-cover" src="/websitetruyen/FileCSSJS/assets/images/i-am-the-sorcerer-king.jpg" alt="Senpai Có Thích Đàn Em Bb (Big Boobs)" /></a>
-                                <div class="top-notice">
-                                    <span class="time-ago">1 Phút Trước</span>
-                                    <span class="type-label new">New</span>
-                                </div>
-                                <h3 class="title-book">
-                                    <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100">Senpai Có Thích Đàn Em Bb (Big Boob...</a>
-                                </h3>
-                                <div class="episode-book">
-                                    <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100-chap-16.html">
-                                        Chương 16</a>
-                                </div>
-                                <div class="more-info">
-                                    <div class="title-more">
-                                        Senpai Có Thích Đàn Em Bb (Big Boobs)
-                                    </div>
-                                    <div class="title-more-other">
-                                        Tên khác: Do You Like Big Juniors?; Bạn Có Thích Một
-                                        Kouhai Bự Chảng?; S Ookii Kouhai Wa Suki Desu Ka
-                                    </div>
-                                    <p class="info">Tình trạng: Đang Cập Nhật</p>
-                                    <p class="info">Lượt xem: 55,789</p>
-                                    <p class="info">Lượt theo dõi: 750</p>
-                                    <div class="list-tags">
-                                        <a class="blue" href="http://truyenqq.com/the-loai/comedy-28.html">Comedy</a><a class="blue" href="http://truyenqq.com/the-loai/romance-36.html">Romance</a><a class="blue" href="http://truyenqq.com/the-loai/slice-of-life-46.html">Slice Of Life</a>
-                                    </div>
-                                    <div class="excerpt">
-                                        Một kouhai hết mực cưng chiều senpai của mình? Một câu
-                                        chuyện tình yêu đầy "Không cân xứng"!!
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /.story-item -->
-                        </li>
-                        <li>
-                            <div class="story-item">
-                                <a href="#"><img class="story-cover" src="/websitetruyen/FileCSSJS/assets/images/i-am-the-sorcerer-king.jpg" alt="Senpai Có Thích Đàn Em Bb (Big Boobs)" /></a>
-                                <div class="top-notice">
-                                    <span class="time-ago">1 Phút Trước</span>
-                                    <span class="type-label hot">Hot</span>
-                                </div>
-                                <h3 class="title-book">
-                                    <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100">Senpai Có Thích Đàn Em Bb (Big Boob...</a>
-                                </h3>
-                                <div class="episode-book">
-                                    <a href="http://truyenqq.com/truyen-tranh/senpai-co-thich-dan-em-bb-big-boobs-8100-chap-16.html">
-                                        Chương 16</a>
-                                </div>
-                                <div class="more-info">
-                                    <div class="title-more">
-                                        Senpai Có Thích Đàn Em Bb (Big Boobs)
-                                    </div>
-                                    <div class="title-more-other">
-                                        Tên khác: Do You Like Big Juniors?; Bạn Có Thích Một
-                                        Kouhai Bự Chảng?; S Ookii Kouhai Wa Suki Desu Ka
-                                    </div>
-                                    <p class="info">Tình trạng: Đang Cập Nhật</p>
-                                    <p class="info">Lượt xem: 55,789</p>
-                                    <p class="info">Lượt theo dõi: 750</p>
-                                    <div class="list-tags">
-                                        <a class="blue" href="http://truyenqq.com/the-loai/comedy-28.html">Comedy</a><a class="blue" href="http://truyenqq.com/the-loai/romance-36.html">Romance</a><a class="blue" href="http://truyenqq.com/the-loai/slice-of-life-46.html">Slice Of Life</a>
-                                    </div>
-                                    <div class="excerpt">
-                                        Một kouhai hết mực cưng chiều senpai của mình? Một câu
-                                        chuyện tình yêu đầy "Không cân xứng"!!
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /.story-item -->
-                        </li>
+                                    <!-- /.story-item -->
+                                </li>
+                        <?php
+                            }
+                        }
+                        ?>
                     </ul>
                     <!-- /.list-stories -->
+                    <div class="has-text-centered">
+                        <a href="#" class="view-more-btn">Xem thêm nhiều truyện</a>
+                    </div>
                 </div>
             </div>
         </div>

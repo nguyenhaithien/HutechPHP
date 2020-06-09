@@ -1,6 +1,19 @@
+<?php 
+    require_once("Controller/Chapter.class.php");
+?>
 <?php
 include_once("header.php");
+if(!isset($_GET["machap"]))
+{
+    header("Location: home.php");
+}else{
+    $machap = $_GET["machap"];
+    // var_dump(array(Manga::ChitietMangaa($ma_truyen)));
+    $chitietchap =Chapter::ThongtinChap($machap);
+    $chitietchap =reset($chitietchap);
+}
 ?>
+
 <section class="main-content on">
 
     <div class="story-see container">
@@ -10,29 +23,29 @@ include_once("header.php");
                     <div id="path" class="path-top">
                         <ol class="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList">
                             <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-                                <a itemprop="item" href="http://truyenqq.com/index.html">
+                                <a itemprop="item" href="home.php">
                                     <span itemprop="name">Trang Chủ</span>
                                 </a>
                                 <meta itemprop="position" content="1" />
                             </li>
                             <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-                                <a itemprop="item" href="http://truyenqq.com/truyen-tranh/vuong-tuoc-tu-huu-bao-boi-3572">
-                                    <span itemprop="name">Vương Tước Tư Hữu Bảo Bối</span>
+                                <a itemprop="item" href="truyen.php?ma_truyen=<?php echo $chitietchap["IdManga"] ?>">
+                                    <span itemprop="name"><?php echo $chitietchap["TenManga"] ?></span>
                                 </a>
                                 <meta itemprop="position" content="2" />
                             </li>
                             <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-                                <a itemprop="item" href="http://truyenqq.com/truyen-tranh/vuong-tuoc-tu-huu-bao-boi-3572-chap-188.html">
-                                    <span itemprop="name">Chương 188</span>
+                                <a itemprop="item" href="chaptranh.php?machap=<?php echo $chitietchap["IdChapter"]?>">
+                                    <span itemprop="name">Chương <?php echo $chitietchap["SttChap"] ?></span>
                                 </a>
                                 <meta itemprop="position" content="3" />
                             </li>
                         </ol>
                     </div>
-                    <h1 class="detail-title"><a href="/truyen-tranh/vuong-tuoc-tu-huu-bao-boi-3572">Vương Tước Tư Hữu Bảo Bối</a> Chap 188</h1>
+                    <h1 class="detail-title"><a href="truyen.php?ma_truyen=<?php echo $chitietchap["IdManga"] ?>"><?php echo $chitietchap["TenManga"]  ?></a> Chap <?php echo $chitietchap["SttChap"].":".$chitietchap["TenChap"]; ?></h1>
                 </div>
                 <div class="story-see-content">
-                    <img class="lazy" src="/websitetruyen/FileCSSJS/assets/images/0.jpg" data-original="/websitetruyen/FileCSSJS/assets/images/0.jpg" alt="Vương Tước Tư Hữu Bảo Bối Chap 188 - Next Chap 189" /><br />
+                    <!-- <img class="lazy" src="/websitetruyen/FileCSSJS/assets/images/0.jpg" data-original="/websitetruyen/FileCSSJS/assets/images/0.jpg" alt="Vương Tước Tư Hữu Bảo Bối Chap 188 - Next Chap 189" /><br />
                     <img class="lazy" src="/websitetruyen/FileCSSJS/assets/images/1.jpg" data-original="/websitetruyen/FileCSSJS/assets/images/1.jpg" alt="Vương Tước Tư Hữu Bảo Bối Chap 188 - Next Chap 189" /><br />
                     <img class="lazy" src="/websitetruyen/FileCSSJS/assets/images/2.jpg" data-original="/websitetruyen/FileCSSJS/assets/images/2.jpg" alt="Vương Tước Tư Hữu Bảo Bối Chap 188 - Next Chap 189" /><br />
                     <img class="lazy" src="/websitetruyen/FileCSSJS/assets/images/3.jpg" data-original="/websitetruyen/FileCSSJS/assets/images/3.jpg" alt="Vương Tước Tư Hữu Bảo Bối Chap 188 - Next Chap 189" /><br />
@@ -40,41 +53,33 @@ include_once("header.php");
                     <img class="lazy" src="/websitetruyen/FileCSSJS/assets/images/5.jpg" data-original="/websitetruyen/FileCSSJS/assets/images/5.jpg" alt="Vương Tước Tư Hữu Bảo Bối Chap 188 - Next Chap 189" /><br />
                     <img class="lazy" src="/websitetruyen/FileCSSJS/assets/images/6.jpg" data-original="/websitetruyen/FileCSSJS/assets/images/6.jpg" alt="Vương Tước Tư Hữu Bảo Bối Chap 188 - Next Chap 189" /><br />
                     <img class="lazy" src="/websitetruyen/FileCSSJS/assets/images/7.jpg" data-original="/websitetruyen/FileCSSJS/assets/images/7.jpg" alt="Vương Tước Tư Hữu Bảo Bối Chap 188 - Next Chap 189" /><br />
-                    <img class="lazy" src="/websitetruyen/FileCSSJS/assets/images/8.jpg" data-original="/websitetruyen/FileCSSJS/assets/images/8.jpg" alt="Vương Tước Tư Hữu Bảo Bối Chap 188 - Next Chap 189" /><br />
-
+                    <img class="lazy" src="/websitetruyen/FileCSSJS/assets/images/8.jpg" data-original="/websitetruyen/FileCSSJS/assets/images/8.jpg" alt="Vương Tước Tư Hữu Bảo Bối Chap 188 - Next Chap 189" /><br /> -->
+                    <?php echo $chitietchap["Noidung"]; ?>    
                     <br /> </div>
 
                 <div class="story-detail has-background-white on">
                     <div id="path">
                         <ol class="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList">
                             <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-                                <a itemprop="item" href="http://truyenqq.com/index.html">
+                                <a itemprop="item" href="home.php">
                                     <span itemprop="name">Trang Chủ</span>
                                 </a>
                                 <meta itemprop="position" content="1" />
                             </li>
                             <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-                                <a itemprop="item" href="http://truyenqq.com/truyen-tranh/vuong-tuoc-tu-huu-bao-boi-3572">
-                                    <span itemprop="name">Vương Tước Tư Hữu Bảo Bối</span>
+                                <a itemprop="item" href="truyen.php?ma_truyen=<?php echo $chitietchap["IdManga"] ?>">
+                                    <span itemprop="name"><?php echo $chitietchap["TenManga"]  ?></span>
                                 </a>
                                 <meta itemprop="position" content="2" />
                             </li>
                             <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-                                <a itemprop="item" href="http://truyenqq.com/truyen-tranh/vuong-tuoc-tu-huu-bao-boi-3572-chap-188.html">
-                                    <span itemprop="name">Chương 188</span>
+                                <a itemprop="item" href="chaptranh.php?machap=<?php echo $chitietchap["IdChapter"]; ?>">
+                                    <span itemprop="name">Chương <?php echo $chitietchap["SttChap"]; ?></span>
                                 </a>
                                 <meta itemprop="position" content="3" />
                             </li>
                         </ol>
                     </div>
-                    <input type="hidden" id="book_id" value="3572" />
-                    <input type="hidden" id="total_page" value="13" />
-                    <input type="hidden" id="current_page" value="1" />
-                    <input type="hidden" id="id_textarea" value="" />
-                    <input type="hidden" id="parent_id" value="" />
-                    <input type="hidden" id="episode_name" value="188" />
-                    <input type="hidden" id="episode_id" value="391923" />
-                    <input type="hidden" id="slug" value="vuong-tuoc-tu-huu-bao-boi" />
                     <div class="comment-container">
                         <span class="story-detail-title"><i class="fas fa-comments"></i>Bình Luận (<span class="comment-count">124</span>)</span>
                         <div class="group01 comments-container">
@@ -317,4 +322,71 @@ include_once("header.php");
         </div>
 </section>
 <!-- /.main-content -->
+<section class="story-see-footer has-background-white on">
+  <div class="container">
+    <div class="level">
+      <div class="level-left">
+        <ul class="list-01">
+          <li>
+            <a class="" href="home.php"
+              ><i class="fas fa-home"></i>
+              <span class="control-see">Trang chủ</span></a
+            >
+          </li>
+          <li>
+            <a class="" href="javascript:void(0);" id="faul"
+              ><i class="fas fa-exclamation-circle"></i>
+              <span class="control-see">Báo lỗi</span></a
+            >
+          </li>
+        </ul>
+      </div>
+      <div class="center level">
+        <div class="prev level-left">
+          <a
+            class="link-prev-chap"
+            href="#"
+            title="next chap ago"
+            ><i class="fas fa-arrow-circle-left"></i
+          ></a>
+        </div>
+        <select class="selectEpisode">
+          <option value="chapchu.php?matruyen=<?php echo 1 ?>" selected
+            >Chương 1</option
+          >
+          <option value="chapchu.php?matruyen=<?php echo 1 ?>"
+            >Chương 2</option
+          >
+          <option value="chapchu.php?matruyen=<?php echo 1 ?>"
+            >Chương 3</option
+          >
+          <option value="chapchu.php?matruyen=<?php echo 1 ?>"
+            >Chương 4</option
+          >
+        </select>
+        <div class="next level-right">
+          <a class="link-next-chap" href="#"
+            ><i class="fas fa-arrow-circle-right"></i
+          ></a>
+        </div>
+      </div>
+      <div class="level-right">
+         <ul class="list-01">
+          <li>
+            <a class="" href="home.php"
+              ><i class="fas fa-home"></i>
+              <span class="control-see">Trang chủ</span></a
+            >
+          </li>
+          <li>
+            <a class="" href="javascript:void(0);" id="faul"
+              ><i class="fas fa-exclamation-circle"></i>
+              <span class="control-see">Báo lỗi</span></a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
 <?php include_once("footer.php"); ?>

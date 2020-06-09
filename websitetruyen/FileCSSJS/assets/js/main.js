@@ -34487,95 +34487,8 @@
             r.css("height", e);
           }
         }
-        var s = null;
-        // f(".text-search").bind("keyup", function (e) {
-        //   var t = f(this),
-        //     n = f(this).val(),
-        //     i = e.keyCode;
-        //   if (38 != i && 40 != i && 37 != i && 39 != i && 13 != i)
-        //     0 < n.trim().length
-        //       ? (clearTimeout(s),
-        //         (s = setTimeout(function () {
-        //           f.ajax({
-        //             type: "POST",
-        //             url: "{% url 'tim-kiem' %}",
-        //             data: { search: n, type: 0 },
-        //           }).done(function (e) {
-        //             f(".list-results").addClass("open"),
-        //               f(".list-results").html(e);
-        //           });
-        //         }, 500)))
-        //       : f(".list-results").removeClass("open");
-        //   else if (
-        //     0 < n.trim().length &&
-        //     1 == t.is(":focus") &&
-        //     13 == i &&
-        //     0 == f(".list-results .active").length
-        //   ) {
-        //     var r = f(t).val();
-        //     window.location.href =
-        //       // document.location.origin + "/tim-kiem.html?q=" + r;
-        //       document.location.origin +
-        //       "/more-manga/?q="+r;  
-        //   }
-        // }),
-          // f(".text-search").click(function () {
-          //   var e = f(this).val();
-          //   "" != f(this).val() && 0 == f(".list-results").hasClass("open")
-          //     ? f
-          //         .ajax({
-          //           type: "POST",
-          //           // url: urlSearch,
-          //           url: "{% url 'tim-kiem' %}",
-          //           data: { search: e, type: 0 },
-          //         })
-          //         .done(function (e) {
-          //           f(".list-results").addClass("open"),
-          //             f(".list-results").html(e);
-          //         })
-          //     : "" != f(".list-container").html().trim()
-          //     ? f(".list-results").addClass("open")
-          //     : f
-          //         .ajax({
-          //           type: "POST",
-          //           // url: urlSearch,
-          //           url: "{% url 'tim-kiem' %}",
-          //           data: { search: f("#keyword-default").val(), type: 1 },
-          //         })
-          //         .done(function (e) {
-          //           f(".list-results").addClass("open"),
-          //             f(".list-results").html(e);
-          //         });
-          // }),
-          f("body").click(function (e) {
-            f(e.target).closest(".list-results").length ||
-              f(e.target).closest(".text-search").length ||
-              f(".list-results").removeClass("open");
-          }),
-          f(document).on("click", ".subscribeBook", function () {
-            var t = f(this),
-              e = t.data("id"),
-              n = t.data("page");
-            f.ajax({
-              url: urlSubcribe,
-              type: "POST",
-              data: { id: e },
-              success: function (e) {
-                "" != e &&
-                  ("index" == n
-                    ? 0 == e
-                      ? t.html('<span class="fa fa-heart"></span>Theo dõi')
-                      : t.html('<span class="far fa-heart"></span>Huỷ theo dõi')
-                    : 0 == e
-                    ? t.html(
-                        '<i class="far fa-heart"></i><span class="control-see"> Theo dõi</span>'
-                      )
-                    : t.html(
-                        '<i class="fa fa-heart"></i><span class="control-see"> Huỷ theo dõi</span>'
-                      ));
-              },
-            });
-          });
+      
+        
         var a = 0;
         f(document).on("click", ".btn-like", function () {
           var e = f(this).data("id");
@@ -34620,21 +34533,21 @@
           f(document).on("click", ".comments-container textarea", function (e) {
             f("#id_textarea").val(f(this).prop("id"));
           }),
-          f(document).on("click", ".comments-container .click_emoji", function (
-            e
-          ) {
-            f.ajax({ method: "POST", url: urlCommentEmoji }).done(function (e) {
-              f("#list_emoji .modal-body").html(e);
-            }),
-              f("#list_emoji").addClass("is-active");
-            var t = f(this)
-              .parent()
-              .parent()
-              .parent()
-              .find("textarea")
-              .prop("id");
-            return f("#id_textarea").val(t), !1;
-          }),
+          // f(document).on("click", ".comments-container .click_emoji", function (
+          //   e
+          // ) {
+          //   f.ajax({ method: "POST", url: urlCommentEmoji }).done(function (e) {
+          //     f("#list_emoji .modal-body").html(e);
+          //   }),
+          //     f("#list_emoji").addClass("is-active");
+          //   var t = f(this)
+          //     .parent()
+          //     .parent()
+          //     .parent()
+          //     .find("textarea")
+          //     .prop("id");
+          //   return f("#id_textarea").val(t), !1;
+          // }),
           f(document).on("click", ".close-emoji", function (e) {
             return f("#list_emoji").removeClass("is-active"), !1;
           }),
@@ -34666,43 +34579,43 @@
                 o.addClass("reply_" + t);
             }
           }),
-          f(document).on("click", ".list-comment .remove_comnent", function (
-            e
-          ) {
-            var t = f(this).data("id"),
-              n = f("#book_id").val(),
-              i = confirm("Bạn có chắc muốn xoá comment này không?"),
-              r = f(this);
-            "" == n && (n = f(this).data("bookid")),
-              1 == i &&
-                f
-                  .ajax({
-                    method: "POST",
-                    url: urlCommentRemove,
-                    data: { id: t, book_id: n },
-                  })
-                  .done(function (e) {
-                    r.parent().parent().parent().parent().remove(),
-                      f(".list-comment .parent_" + t).remove();
-                  });
-          }),
-          f(document).on("click", ".comment-head .bannick_comnent", function (
-            e
-          ) {
-            var t = f(this).data("id"),
-              n = confirm(
-                "Bạn có chắc muốn xoá Cấm Bình Luận thành viên này không?"
-              );
-            f(this);
-            1 == n &&
-              f
-                .ajax({
-                  method: "POST",
-                  url: urlCommentBannick,
-                  data: { id: t },
-                })
-                .done(function (e) {});
-          }),
+          // f(document).on("click", ".list-comment .remove_comnent", function (
+          //   e
+          // ) {
+          //   var t = f(this).data("id"),
+          //     n = f("#book_id").val(),
+          //     i = confirm("Bạn có chắc muốn xoá comment này không?"),
+          //     r = f(this);
+          //   "" == n && (n = f(this).data("bookid")),
+          //     1 == i &&
+          //       f
+          //         .ajax({
+          //           method: "POST",
+          //           url: urlCommentRemove,
+          //           data: { id: t, book_id: n },
+          //         })
+          //         .done(function (e) {
+          //           r.parent().parent().parent().parent().remove(),
+          //             f(".list-comment .parent_" + t).remove();
+          //         });
+          // }),
+          // f(document).on("click", ".comment-head .bannick_comnent", function (
+          //   e
+          // ) {
+          //   var t = f(this).data("id"),
+          //     n = confirm(
+          //       "Bạn có chắc muốn xoá Cấm Bình Luận thành viên này không?"
+          //     );
+          //   f(this);
+          //   1 == n &&
+          //     f
+          //       .ajax({
+          //         method: "POST",
+          //         url: urlCommentBannick,
+          //         data: { id: t },
+          //       })
+          //       .done(function (e) {});
+          // }),
           f(document).on("click", "#list_emoji .emoji_comment", function (e) {
             var t = f(this).data("code");
             !(function (e, t) {
@@ -34735,71 +34648,8 @@
                 n.scrollTop = i;
               }
             })(f("#id_textarea").val(), t);
-          }),
-          f(document).on("click", ".submit_comment", function (e) {
-            var t = f(this).parent().find("textarea").val().trim(),
-              n = f(this).parent().find("textarea").data("id"),
-              i = f(this).parent().find("textarea").data("parent"),
-              r = f(this).parent().find("textarea").data("replyname"),
-              o = f(this).parent().find("textarea").data("user"),
-              s = f("#book_id").val(),
-              a = f(this).parent().parent().find("#name_comment").val().trim(),
-              l = f(this).parent().parent().find("#email_comment").val().trim(),
-              c = f("#episode_name").val(),
-              u = f("#episode_id").val(),
-              d = {
-                name_comment: a,
-                email_comment: l,
-                slug: f("#slug").val(),
-                content: t,
-                book_id: s,
-                episode_name: c,
-                episode_id: u,
-              },
-              p = f(this);
-            null != typeof i && (d.parent_id = i),
-              null != typeof n && (d.reply_id = n),
-              null != typeof o && (d.reply_user = o),
-              null != typeof r && (d.reply_name = r),
-              "" == t
-                ? alert("Vui lòng nhập nội dung bình luận.")
-                : "" == a
-                ? alert("Vui lòng nhập tên của bạn.")
-                : 16 < a.length
-                ? alert("Tên không được quá 16 ký tự.")
-                : "" != l && 0 == g(l)
-                ? alert("Định dạng email chưa chính xác")
-                : "" != a &&
-                  0 ==
-                    (function (e) {
-                      return /^[a-zA-Z\-\s\_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]+$/.test(
-                        e
-                      );
-                    })(a)
-                ? alert("Tên không được sử dụng các ký tự đặc biệt.")
-                : f
-                    .ajax({ method: "POST", url: urlComment, data: d })
-                    .done(function (e) {
-                      void 0 !== i
-                        ? (f(".child_" + n).after(e),
-                          p.parent().parent().parent().remove())
-                        : (f(".list-comment").prepend(e),
-                          p.parent().find("textarea").val("")),
-                        f(".content-comment").readmore({
-                          maxHeight: 105,
-                          speed: 100,
-                          moreLink:
-                            '<p class="readmore"><a href="#">Xem Thêm</a></p>',
-                          lessLink:
-                            '<p class="readmore"><a href="#">Rút Gọn</a></p>',
-                          embedCSS: !0,
-                          sectionCSS: "display: block; width: 100%;",
-                          startOpen: !1,
-                          expandedClass: "readmore-js-expanded",
-                          collapsedClass: "readmore-js-collapsed",
-                        });
-                    });
-          });
+          // }),
+          }); /// chú thích dòng trên tại xóa đóng dưới rồi
         if (
           (f(document).on("click", ".load_more_comment", function (e) {
             var t = f("#book_id").val(),
@@ -34933,91 +34783,12 @@
           f(".refresh-captcha").click(function (e) {
             m(f(this).data("type"));
           }),
-          // f("#button_register").click(function (i) {
-          //   var e = "";
-          //     "" == f("#user_register").val().trim() &&
-          //       (e += "Tài khoản không được để trống.\n"),
-          //     "" == f("#email_register").val().trim()
-          //     ? (e += "Email không được để trống.\n")
-          //     : 0 == g(f("#email_register").val().trim()) &&
-          //       (e += "Định dạng email không chính xác.\n"),
-          //     "" == f("#password_register").val().trim()
-          //     ? (e += "Mật khẩu không được để trống.\n")
-          //       : f("#password_register").val().trim().length <= 6 &&
-          //         (e += "Mật khẩu phải lớn hơn 6 ký tự.\n"),
-          //     "" == f("#npassword_register").val().trim()
-          //     ? (e += "Nhập lại mật khẩu không được để trống.\n")
-          //       :f("#npassword_register").val().trim() == f("#password_register").val().trim() &&
-          //         ( e += "Mật khẩu không đồng nhất \n"),
-          //     "" != e
-          //       ? alert(e)
-          //       // : f.ajax({
-          //       //     // type: "POST",
-          //       //     // cache: !1,
-          //       //     // url: urlRegister,
-          //       //     // dataType: "json",
-          //       //     // data: {
-          //       //     //   email: f("#email_register").val(),
-          //       //     //   password: f("#password_register").val(),
-          //       //     //   captcha: f("#captcha_register").val(),
-          //       //     //   id_captcha: f("#captcha-register").val(),
-          //       //     //   expire: 1,
-          //       //     // },
-          //       //     // success: function (e) {
-          //       //     //   if ("0" == e.status) {
-          //       //     //     var t = "";
-          //       //     //     for (var n in e.error) t += e.error[n] + "\n";
-          //       //     //     alert(t), i.preventDefault();
-          //       //     //   } else location.reload(!0);
-          //       //     // },
-          //       //   });
-          // }),
-          f("#button-forgot").click(function (e) {
-            var t = "";
-            "" == f("#email-forgot").val().trim()
-              ? (t += "Email không được để trống.\n")
-              : 0 == g(f("#email-forgot").val().trim()) &&
-                (t += "Định dạng email không chính xác.\n"),
-              "" == f("#captcha_forgot").val().trim() &&
-                (t += "Mã xác nhận không được để trống.\n"),
-              "" != t
-                ? alert(t)
-                : (e.preventDefault(),
-                  f.ajax({
-                    type: "POST",
-                    cache: !1,
-                    url: urlForgot,
-                    dataType: "json",
-                    data: {
-                      email: f("#email-forgot").val(),
-                      captcha: f("#captcha_forgot").val(),
-                      id_captcha: f("#captcha-forgot").val(),
-                    },
-                    success: function (e) {
-                      if ("0" == e.status) {
-                        var t = "";
-                        for (var n in e.error) t += e.error[n] + "\n";
-                        alert(t);
-                      } else
-                        f(".forget-password-section").addClass("hidden"),
-                          f(".sent-password-section").removeClass("hidden");
-                    },
-                  }));
-          }),
           f(".story-list #category").change(function () {
             window.location.href = f(this).val();
           }),
           f(".story-list #category-sort").change(function () {
             window.location.href = f(this).val();
           }),
-          // f(".btn_search").click(function () {
-          //   var e = f(this).parent().find(".text-search").val();
-          //   "" != e &&
-          //     (
-          //       // window.location.href =
-          //       // document.location.origin + "/tim-kiem.html?q=" + e);
-          //       window.location.href = document.location.origin+"/more-manga/?q="+e); 
-          // }),
           f(".remove-subscribe").click(function () {
             var e = f(this).data("id");
             f.ajax({

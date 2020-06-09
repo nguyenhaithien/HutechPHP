@@ -1,30 +1,47 @@
+<?php 
+// require_once("Controller/Manga.class.php"); 
+    // include ("Controller/Manga.class.php");
+    include ("Controller/Chapter.class.php");
+    // include ("Controller/Theloai.class.php");
+?>
 <?php
 include_once("header.php");
+if(!isset($_GET["ma_truyen"]))
+{
+    header("Location: home.php");
+}else{
+    $ma_truyen = $_GET["ma_truyen"];
+    // var_dump(array(Manga::ChitietMangaa($ma_truyen)));
+    $chitiettruyen =Manga::ChitietMangaa($ma_truyen);
+    $chitiettruyen =reset($chitiettruyen);
+    $danhsachchap = Chapter::Chapcuatruyen($ma_truyen);
+}
 ?>
 <section class="main-content">
     <div class="container has-background-white story-detail">
         <div id="path">
             <ol class="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList">
                 <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-                    <a itemprop="item" href="http://truyenqq.com/index.html">
+                    <a itemprop="item" href="/websitetruyen/home.php">
                         <span itemprop="name">Trang Chủ</span>
                     </a>
                     <meta itemprop="position" content="1" />
                 </li>
                 <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-                    <a itemprop="item" href="http://truyenqq.com/truyen-tranh/vuong-tuoc-tu-huu-bao-boi-3572">
-                        <span itemprop="name">Vương Tước Tư Hữu Bảo Bối</span>
+                    <a itemprop="item" href="/websitetruyen/truyen.php?ma_truyen=<?php echo $chitiettruyen["IdManga"]; ?>">
+                        <span itemprop="name"><?php echo $chitiettruyen["TenManga"]; ?></span>
                     </a>
                     <meta itemprop="position" content="2" />
                 </li>
             </ol>
         </div>
         <div class="block01">
-            <div class="left"><img src="/websitetruyen/FileCSSJS/assets/images/fukakai-na-boku-no-subete-o_1557759637.jpg" alt="Vương Tước Tư Hữu Bảo Bối" /></div>
+            <div class="left"><img src="<?php echo "/websitetruyen/" . $chitiettruyen["Anh"]; ?>" alt="<?php echo $chitiettruyen["TenManga"]; ?>" /></div>
             <div class="center">
-                <h1>Vương Tước Tư Hữu Bảo Bối</h1>
+                <h1><?php echo $chitiettruyen["TenManga"]; ?></h1>
                 <div class="txt">
-                    <p class="info-item">Tác giả: <a class="org" href="http://truyenqq.com/tac-gia/dang-cap-nhat-239.html">Đang Cập Nhật</a></p>
+                    <p class="info-item"><?php echo "Tên khác:" .$chitiettruyen["TenKhac"];?></p>
+                    <p class="info-item">Tác giả: <a class="org" href="#">Đang Cập Nhật</a></p>
                     <p class="info-item">Tình trạng: Đang Cập Nhật</p>
                     <div>
                         <span>Thống kê:</span>
@@ -34,20 +51,23 @@ include_once("header.php");
                     </div>
                 </div>
                 <ul class="list01">
-                    <li class="li03"><a href="http://truyenqq.com/the-loai/comedy-28.html">Comedy</a></li>
-                    <li class="li03"><a href="http://truyenqq.com/the-loai/drama-29.html">Drama</a></li>
-                    <li class="li03"><a href="http://truyenqq.com/the-loai/manhua-35.html">Manhua</a></li>
-                    <li class="li03"><a href="http://truyenqq.com/the-loai/romance-36.html">Romance</a></li>
-                    <li class="li03"><a href="http://truyenqq.com/the-loai/shoujo-38.html">Shoujo</a></li>
+                  <?php
+                    $danhsachtheloai = Theloai::Theloaicuatruyen($chitiettruyen["IdManga"]);
+                    foreach ($danhsachtheloai as $itemtl) {
+                    ?>
+                    <li class="li03"><a href="#"><?php echo $itemtl["TenTheloai"];?></a></li>
+                <?php } ?>
                 </ul>
 
                 <ul class="story-detail-menu">
-                    <li class="li01"><a href="http://truyenqq.com/truyen-tranh/vuong-tuoc-tu-huu-bao-boi-3572-chap-1.html" class="button is-danger is-rounded"><span class="btn-read"></span>Đọc từ đầu</a></li>
-                    <li class="li02"><a href="javascript:void(0);" class="button is-danger is-rounded btn-subscribe subscribeBook" data-page="index" data-id="3572"><span class="fas fa-heart"></span>Theo dõi</a></a></li>
-                    <li class="li03"><a href="javascript:void(0);" class="button is-danger is-rounded btn-like" data-id="3572"><span class="fas fa-thumbs-up"></span>Thích</a></li>
+                    <li class="li01">
+                    <a href="#" class="button is-danger is-rounded"><span class="btn-read"></span>Đọc từ đầu</a>
+                    </li>
+                    <li class="li02"><a href="#" class="button is-danger is-rounded btn-subscribe subscribeBook" data-page="index" data-id="3572"><span class="fas fa-heart"></span>Theo dõi</a></a></li>
+                    <li class="li03"><a href="#" class="button is-danger is-rounded btn-like" data-id="3572"><span class="fas fa-thumbs-up"></span>Thích</a></li>
                 </ul>
                 <div class="txt txt01 story-detail-info">
-                    <p>Bị chị gái hạ dược ném vào khách sạn, trời đưa đất đẩy lại mang thai Vương tử Điện Hạ? Bị ép phải phá bỏ nên buộc phải trốn mất dạng, mặc dù ngay cả khuôn mặt người đàn ông ấy cũng không thấy rõ, nhưng không ngờ tới Vương tử Điện Hạ treo giải thưởng một trăm vạn với ý đồ truy nã “Nghi phạm” ! Cô mèo hoang lần này xem cô tính trốn như thế nào…</p>
+                    <p><?php echo $chitiettruyen['GioiThieu']; ?></p>
                 </div>
             </div>
         </div>
@@ -62,111 +82,26 @@ include_once("header.php");
             </div>
             <div class="box">
                 <div class="works-chapter-list">
+                    <?php
+                    if($danhsachchap){ 
+                    foreach($danhsachchap as $item ){ ?>
                     <div class="works-chapter-item row">
                         <div class="col-md-10 col-sm-10 col-xs-8 ">
-                            <a target="_blank" href="http://truyenqq.com/truyen-tranh/vuong-tuoc-tu-huu-bao-boi-3572-chap-15.html">Chương 15</a>
+                            <?php if($chitiettruyen["KieuTruyen"]==1){ ?>
+                                <a target="_blank" href="chaptranh.php?machap=<?php echo $item["IdChapter"] ?>"><?php echo "Chương ".$item["SttChap"].":".$item["TenChap"]; ?></a>
+                            <?php } else {?>
+                                <a target="_blank" href="chapchu.php?machap=<?php echo $item["IdChapter"] ?>"><?php echo "Chương ".$item["SttChap"].":".$item["TenChap"]; ?></a>
+                            <?php }?>
+                           
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-4 text-right">
-                            19/05/2019 </div>
+                           <?php echo $item["NgayTao"]?></div>
                     </div>
+                    <?php }} else { ?>
                     <div class="works-chapter-item row">
-                        <div class="col-md-10 col-sm-10 col-xs-8 ">
-                            <a target="_blank" href="http://truyenqq.com/truyen-tranh/vuong-tuoc-tu-huu-bao-boi-3572-chap-14.html">Chương 14</a>
-                        </div>
-                        <div class="col-md-2 col-sm-2 col-xs-4 text-right">
-                            19/05/2019 </div>
+                        Chưa cập nhập
                     </div>
-                    <div class="works-chapter-item row">
-                        <div class="col-md-10 col-sm-10 col-xs-8 ">
-                            <a target="_blank" href="http://truyenqq.com/truyen-tranh/vuong-tuoc-tu-huu-bao-boi-3572-chap-13.html">Chương 13</a>
-                        </div>
-                        <div class="col-md-2 col-sm-2 col-xs-4 text-right">
-                            19/05/2019 </div>
-                    </div>
-                    <div class="works-chapter-item row">
-                        <div class="col-md-10 col-sm-10 col-xs-8 ">
-                            <a target="_blank" href="http://truyenqq.com/truyen-tranh/vuong-tuoc-tu-huu-bao-boi-3572-chap-12.html">Chương 12</a>
-                        </div>
-                        <div class="col-md-2 col-sm-2 col-xs-4 text-right">
-                            19/05/2019 </div>
-                    </div>
-                    <div class="works-chapter-item row">
-                        <div class="col-md-10 col-sm-10 col-xs-8 ">
-                            <a target="_blank" href="http://truyenqq.com/truyen-tranh/vuong-tuoc-tu-huu-bao-boi-3572-chap-11.html">Chương 11</a>
-                        </div>
-                        <div class="col-md-2 col-sm-2 col-xs-4 text-right">
-                            19/05/2019 </div>
-                    </div>
-                    <div class="works-chapter-item row">
-                        <div class="col-md-10 col-sm-10 col-xs-8 ">
-                            <a target="_blank" href="http://truyenqq.com/truyen-tranh/vuong-tuoc-tu-huu-bao-boi-3572-chap-10.html">Chương 10</a>
-                        </div>
-                        <div class="col-md-2 col-sm-2 col-xs-4 text-right">
-                            19/05/2019 </div>
-                    </div>
-                    <div class="works-chapter-item row">
-                        <div class="col-md-10 col-sm-10 col-xs-8 ">
-                            <a target="_blank" href="http://truyenqq.com/truyen-tranh/vuong-tuoc-tu-huu-bao-boi-3572-chap-9.html">Chương 9</a>
-                        </div>
-                        <div class="col-md-2 col-sm-2 col-xs-4 text-right">
-                            19/05/2019 </div>
-                    </div>
-                    <div class="works-chapter-item row">
-                        <div class="col-md-10 col-sm-10 col-xs-8 ">
-                            <a target="_blank" href="http://truyenqq.com/truyen-tranh/vuong-tuoc-tu-huu-bao-boi-3572-chap-8.html">Chương 8</a>
-                        </div>
-                        <div class="col-md-2 col-sm-2 col-xs-4 text-right">
-                            19/05/2019 </div>
-                    </div>
-                    <div class="works-chapter-item row">
-                        <div class="col-md-10 col-sm-10 col-xs-8 ">
-                            <a target="_blank" href="http://truyenqq.com/truyen-tranh/vuong-tuoc-tu-huu-bao-boi-3572-chap-7.html">Chương 7</a>
-                        </div>
-                        <div class="col-md-2 col-sm-2 col-xs-4 text-right">
-                            19/05/2019 </div>
-                    </div>
-                    <div class="works-chapter-item row">
-                        <div class="col-md-10 col-sm-10 col-xs-8 ">
-                            <a target="_blank" href="http://truyenqq.com/truyen-tranh/vuong-tuoc-tu-huu-bao-boi-3572-chap-6.html">Chương 6</a>
-                        </div>
-                        <div class="col-md-2 col-sm-2 col-xs-4 text-right">
-                            19/05/2019 </div>
-                    </div>
-                    <div class="works-chapter-item row">
-                        <div class="col-md-10 col-sm-10 col-xs-8 ">
-                            <a target="_blank" href="http://truyenqq.com/truyen-tranh/vuong-tuoc-tu-huu-bao-boi-3572-chap-5.html">Chương 5</a>
-                        </div>
-                        <div class="col-md-2 col-sm-2 col-xs-4 text-right">
-                            19/05/2019 </div>
-                    </div>
-                    <div class="works-chapter-item row">
-                        <div class="col-md-10 col-sm-10 col-xs-8 ">
-                            <a target="_blank" href="http://truyenqq.com/truyen-tranh/vuong-tuoc-tu-huu-bao-boi-3572-chap-4.html">Chương 4</a>
-                        </div>
-                        <div class="col-md-2 col-sm-2 col-xs-4 text-right">
-                            19/05/2019 </div>
-                    </div>
-                    <div class="works-chapter-item row">
-                        <div class="col-md-10 col-sm-10 col-xs-8 ">
-                            <a target="_blank" href="http://truyenqq.com/truyen-tranh/vuong-tuoc-tu-huu-bao-boi-3572-chap-3.html">Chương 3</a>
-                        </div>
-                        <div class="col-md-2 col-sm-2 col-xs-4 text-right">
-                            19/05/2019 </div>
-                    </div>
-                    <div class="works-chapter-item row">
-                        <div class="col-md-10 col-sm-10 col-xs-8 ">
-                            <a target="_blank" href="http://truyenqq.com/truyen-tranh/vuong-tuoc-tu-huu-bao-boi-3572-chap-2.html">Chương 2</a>
-                        </div>
-                        <div class="col-md-2 col-sm-2 col-xs-4 text-right">
-                            19/05/2019 </div>
-                    </div>
-                    <div class="works-chapter-item row">
-                        <div class="col-md-10 col-sm-10 col-xs-8 ">
-                            <a target="_blank" href="http://truyenqq.com/truyen-tranh/vuong-tuoc-tu-huu-bao-boi-3572-chap-1.html">Chương 1</a>
-                        </div>
-                        <div class="col-md-2 col-sm-2 col-xs-4 text-right">
-                            19/05/2019 </div>
-                    </div>
+                    <?php }?>
                 </div>
             </div>
         </div>

@@ -29,7 +29,7 @@ class Db
         //thực hiện excute truy vấn
         $connection->query("SET NAMES utf-8");
         $result = $connection->query($queryString);
-        // $connection->close();
+        //$connection->close();
         return $result;
     }
     public function insert_id($queryString)
