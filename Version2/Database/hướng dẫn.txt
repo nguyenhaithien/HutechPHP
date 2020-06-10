@@ -1,0 +1,1 @@
+Tạo Database dưới dạng utf8mb4_general_ci nha. Xong import file db_truyen.sql. Là nó sẽ ko lỗi phông
